@@ -6,4 +6,4 @@ To Do list-
 3. need to check for the 4 features state.now it is running on 128 vector state.
 4. news_dic file containing news,need to check how many news are similar.load this dictionary and check.
 5. number of games for which it trained equals-*15 change in the epoch and run.
-6. there is too much up and down fed rates are set by the agent have to find a policy which having very low fluctuation.
+6. there is too much up and down fed rates are set by the agent have to find a policy which having very low fluctuation.so, need to set reward for small fed rates change.
