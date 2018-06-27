@@ -11,8 +11,8 @@ class STATE(object):
     word_to_ix={}
     news_ll=[]
     ##json file for saving the loading the news and its unique position
-    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master\\record'+'\\'+'news_dic.json'
-    news_list_loc='C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master\\record'+'\\'+'news_list.json'
+    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\record'+'\\'+'news_dic.json'
+    news_list_loc='C:\\Users\\royal\\Downloads\\Compressed\\record'+'\\'+'news_list.json'
 
     ##load the word_to_ix which contain news and its unique index and news_ll contain unique news.
     def __init__(self):
