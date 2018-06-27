@@ -1,3 +1,4 @@
+## understanding doc for FIFA game.
 flow- main-->load_model()-->FIFA(-->grab_screen,CNN)-->train
 
 (ExperienceReplay),test.
