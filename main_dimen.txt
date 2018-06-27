@@ -1,3 +1,4 @@
+##dimension for the control used for pywinauto
 136,680  - GO
 95,569 - Raise
 182,569 - Cut
@@ -39,6 +40,7 @@
 1072,434 - bottom_right
 
 --selenium picture--
+##dimension for the control used for selenium
 --news--
 451,2 - top_left
 1086,2 - top_right
