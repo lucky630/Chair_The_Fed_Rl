@@ -5,14 +5,14 @@ import numpy as np
 
 torch.manual_seed(1)
 
-##used to definethe state.
+##used to define the state.
 
 class STATE(object):
     word_to_ix={}
     news_ll=[]
     ##json file for saving the loading the news and its unique position
-    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\record'+'\\'+'news_dic.json'
-    news_list_loc='C:\\Users\\royal\\Downloads\\Compressed\\record'+'\\'+'news_list.json'
+    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master\\record'+'\\'+'news_dic.json'
+    news_list_loc='C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master\\record'+'\\'+'news_list.json'
 
     ##load the word_to_ix which contain news and its unique index and news_ll contain unique news.
     def __init__(self):
@@ -24,6 +24,7 @@ class STATE(object):
 
     ##128 dimension features for the state.
     def get_features_128(self,news,fed,unemp,infla):
+        print('\n features 128 method\n')
         word_to_ix=self.word_to_ix
         news_ll=self.news_ll
         if news not in news_ll:
@@ -42,6 +43,7 @@ class STATE(object):
 
     ##4 dimension features for the state.
     def get_features_4(self,news,fed,unemp,infla):
+        print('\n features 4 method\n')
         if news not in self.news_ll:
             self.word_to_ix[news]=len(set(self.news_ll))
             self.news_ll.append(news)
