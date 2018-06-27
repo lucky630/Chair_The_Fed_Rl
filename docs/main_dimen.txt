@@ -1,0 +1,70 @@
+136,680  - GO
+95,569 - Raise
+182,569 - Cut
+
+--News--
+447,113 - top_left
+447,213 - top_right
+1080,113 - bottom_left
+1080,213 - bottom_right
+
+--Quaters--
+1190,158 - top_left
+1249,158 - top_right
+1190,202 - botttom_left
+1249,202 - bottom_right
+
+--fed fund rates--
+1108,372 - top_left
+1276,372 - top_right
+1108,449 - bottom_left
+1276,449 - bottom_right
+
+--Unemployment--
+1108,521 - top_left
+1276,521 - top_right
+1108,599 - bottom_left
+1276,599 - bottom_right
+
+--Inflation--
+1108,670 - top_left
+1276,670 - top_right
+1108,722 - bottom_left
+1276,722 - bottom_right
+
+--last--
+300,337 - top_left
+1072,337 - top_right
+300,434 - bottom_left
+1072,434 - bottom_right
+
+--selenium picture--
+--news--
+451,2 - top_left
+1086,2 - top_right
+451,100 - bottom_left
+1086,100 - bottom_right
+
+--fed_rate--
+1108,263 - top_left
+1277,263 - top_right
+1108,341 - bottom_left
+1277,341 - bottom_right
+
+--unemployment--
+1108,411 - top_left
+1277,411 -top_right
+1108,488 - bottom_left
+1277,488 - bottom_right
+
+--inflation--
+1108,559 - top_left
+1277,559 - top_right
+1108,610 - bottom_left
+1277,610 - bottom_right
+
+--message--
+327,45 - top_left
+1045,45 - top_right
+327,137 - bottom_left
+1045,137 - bottom_right
