@@ -2,6 +2,10 @@ import time
 import numpy as np
 from Game_util_selenium import *
 
+chromedriver = "C:\\Users\\royal\\Downloads\\Programs\\chromedriver_win32\\chromedriver.exe"
+os.environ["webdriver.chrome.driver"] = chromedriver
+driver = webdriver.Chrome(chromedriver)
+
 def test(game, model, n_games, verbose=1):
     # Test
     # Reseting the win counter
@@ -13,12 +17,12 @@ def test(game, model, n_games, verbose=1):
         # Resetting the game
         game.reset()
         game_over = False
-        input_t = game.observe()
         if e == 0:
-            print('Training is paused. Press p once game is loaded and is ready to be played.')
+            print('Testing started. game is loaded and is ready to be played.')
             open_page_start(driver)
         else:
             print('Game is played. at epoch '+str(e))
+        input_t = game.observe(driver)
         while not game_over:
             # The learner is acting on the last observed game screen
             input_tm1 = input_t
@@ -28,7 +32,7 @@ def test(game, model, n_games, verbose=1):
             print('q values=' + str(q[0]))
             action = np.argmax(q[0])
             # apply action, get rewards and new state
-            input_t, reward, game_over = game.act(action)
+            input_t, reward, game_over = game.act(action,driver)
             # If we managed to catch the fruit we add 1 to our win counter
             if reward == 1:
                 win_cnt += 1
