@@ -45,10 +45,6 @@ def train(game, model, epochs, verbose=1):
             open_page_start(driver)
             time.sleep(12)
 	##after every 16 quarters restart the game from win or loss page.
-        elif e%15 == 0:
-            click_go(driver)
-            st = get_last_msg(driver)
-            print('final result: ' + st)
         else:
             print('Game is played. at epoch '+str(e))
 		
@@ -63,7 +59,7 @@ def train(game, model, epochs, verbose=1):
             if np.random.rand() <= epsilon:
                 # do some random action.
                 action = int(np.random.randint(0, num_actions, size=1))
-                print('random action'+str(action))
+                print('random action: '+str(action))
             else:
                 # non random action
                 # q contains the expected rewards for the actions

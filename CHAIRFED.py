@@ -26,9 +26,16 @@ class CHAIRFED(object):
         print('q-learning reward: ' + str(ingame_reward))
         return ingame_reward
 
-    def _is_over(self, action):
+    def _is_over(self, action,driver):
         print('\n is_over method\n')
-        is_over = True if action in [0, 1, 2, 3, 4, 5, 6, 7] else False
+        is_over=False
+        st = get_last_msg(driver)
+        if st == 'Congratulations!' or st=='Sorry.':
+            is_over = True
+            print('last quarter result is :'+st)
+        else:
+            is_over = False
+        #is_over = True if action in [0, 1, 2, 3, 4, 5, 6, 7] else False
         return is_over
 
     def observe(self,driver):
@@ -43,7 +50,8 @@ class CHAIRFED(object):
         data=str(fed)+','+str(unemp)+','+str(infl)+','+news
         print(data)
         # process through state_graph to get the state.
-        state = self.state_graph.get_features_128(news,fed,unemp,infl)
+        #state = self.state_graph.get_features_128(news,fed,unemp,infl)
+        state = self.state_graph.get_features_4(news,fed,unemp,infl)
         return state
 
     def act(self, action, driver):
@@ -55,8 +63,8 @@ class CHAIRFED(object):
         fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
         set_fed_rate(driver,fed,display_action[action])
 
+        game_over = self._is_over(action,driver)
         reward = self._get_reward(driver)
-        game_over = self._is_over(action)
         return self.observe(driver), reward, game_over
 
     def reset(self):

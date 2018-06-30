@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 
 from CHAIRFED import CHAIRFED
 from train_model import train
-from test import test
+from test_model import test
 
 
 def baseline_model(grid_size, num_actions, hidden_size):
@@ -41,8 +41,8 @@ def load_model():
     return loaded_model
 
 
-model = baseline_model(grid_size=128, num_actions=8, hidden_size=512)
-# model = baseline_model(grid_size=4, num_actions=8, hidden_size=100)
+#model = baseline_model(grid_size=128, num_actions=8, hidden_size=512)
+model = baseline_model(grid_size=4, num_actions=8, hidden_size=100)
 # model = load_model()
 model.summary()
 
@@ -54,7 +54,7 @@ print('started!!!')
 game = CHAIRFED()
 print("game object created")
 
-epoch = 48  # Number of games played in training,
+epoch = 80  # Number of games played in training,
 
 train_mode = 1
 

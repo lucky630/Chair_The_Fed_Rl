@@ -83,15 +83,16 @@ def get_inflate_rate(screen):
 
 def get_last_msg(driver):
     screen = screen_grab(driver)
-    cv2.imwrite('record\\last'+'.PNG',screen)
+    #cv2.imwrite('record\\last'+'.PNG',screen)
     last = screen[45:137,327:1045]
     i = Image.fromarray(last.astype('uint8'), 'RGB')
     st = pytesseract.image_to_string(i, lang = 'eng')
     if st=='Congratulations!':
         play_again_win(driver)
-    else:
+        time.sleep(12)
+    if st=='Sorry.':
         play_again_loss(driver)
-    time.sleep(12)
+        time.sleep(12)
     return st
 
 def set_fed_rate(driver,curr,nex):
