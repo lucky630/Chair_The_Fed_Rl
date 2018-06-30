@@ -3,6 +3,7 @@ import pytesseract as pt
 from STATE import STATE
 from Game_util_selenium import *
 from selenium import webdriver
+import time
 
 class CHAIRFED(object):
 	
@@ -15,18 +16,21 @@ class CHAIRFED(object):
     def _get_reward(self, driver):
         print('\n get reward method\n')
         screen = screen_grab(driver)
-        fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
-        unemp=float(''.join(get_unemploy_rate(screen).split()).split('%')[0])
-        infl=float(''.join(get_inflate_rate(screen).split()).split('%')[0])
         ingame_reward=-10
-        if (unemp > 4.0 and unemp < 6.0) and (infl > 1.0 and infl < 3.0):
-            ingame_reward = 1
-        else:
-            ingame_reward = -1
-        print('q-learning reward: ' + str(ingame_reward))
+        try:
+            fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
+            unemp=float(''.join(get_unemploy_rate(screen).split()).split('%')[0])
+            infl=float(''.join(get_inflate_rate(screen).split()).split('%')[0])
+            if (unemp > 4.0 and unemp < 6.0) and (infl > 1.0 and infl < 3.0):
+                ingame_reward = 1
+            else:
+                ingame_reward = -1
+            print('q-learning reward: ' + str(ingame_reward))
+        except ValueError:
+            print('Value Exception in get_reward method: ')
         return ingame_reward
 
-    def _is_over(self, action,driver):
+    def _is_over(self,driver):
         print('\n is_over method\n')
         is_over=False
         st = get_last_msg(driver)
@@ -42,15 +46,18 @@ class CHAIRFED(object):
         print('\n observe method\n')
         # get current state s from screen using screen_grab
         screen = screen_grab(driver)
-        fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
-        unemp=float(''.join(get_unemploy_rate(screen).split()).split('%')[0])
-        infl=float(''.join(get_inflate_rate(screen).split()).split('%')[0])
-        news=' '.join(get_news(screen).split('\n'))
-
-        data=str(fed)+','+str(unemp)+','+str(infl)+','+news
-        print(data)
-        # process through state_graph to get the state.
-        #state = self.state_graph.get_features_128(news,fed,unemp,infl)
+        fed,unemp,infl,news=0.0,0.0,0.0,''
+        try:
+            fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
+            unemp=float(''.join(get_unemploy_rate(screen).split()).split('%')[0])
+            infl=float(''.join(get_inflate_rate(screen).split()).split('%')[0])
+            news=' '.join(get_news(screen).split('\n'))
+            data=str(fed)+','+str(unemp)+','+str(infl)+','+news
+            print(data.encode('utf8'))
+            # process through state_graph to get the state.
+            #state = self.state_graph.get_features_128(news,fed,unemp,infl)
+        except ValueError:
+            print('Value Exception in observe method: ')
         state = self.state_graph.get_features_4(news,fed,unemp,infl)
         return state
 
@@ -63,8 +70,14 @@ class CHAIRFED(object):
         fed=float(''.join(get_fed_rates(screen).split()).split('%')[0])
         set_fed_rate(driver,fed,display_action[action])
 
-        game_over = self._is_over(action,driver)
+        game_over = self._is_over(driver)
         reward = self._get_reward(driver)
+        ##condition for delay in finish page loading..
+        if reward==-10:
+            print('game over true bcz of value exception. wait for 5 second:')
+            time.sleep(5)
+            game_over = self._is_over(driver)
+            reward = self._get_reward(driver)
         return self.observe(driver), reward, game_over
 
     def reset(self):

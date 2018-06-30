@@ -54,7 +54,7 @@ print('started!!!')
 game = CHAIRFED()
 print("game object created")
 
-epoch = 80  # Number of games played in training,
+epoch = 8  # Number of games played in training,
 
 train_mode = 1
 
