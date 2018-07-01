@@ -5,7 +5,6 @@ from keras.models import Sequential
 from keras.models import model_from_json
 from keras.optimizers import sgd
 from matplotlib import pyplot as plt
-
 from CHAIRFED import CHAIRFED
 from train_model import train
 from test_model import test
@@ -30,6 +29,7 @@ def moving_average_diff(a, n=100):
 
 def load_model():
     # load json and create model
+    print('loading already saved model..')
     json_file = open('saved_model/model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
@@ -40,10 +40,9 @@ def load_model():
     loaded_model.compile(loss='mse', optimizer='sgd')
     return loaded_model
 
-
 #model = baseline_model(grid_size=128, num_actions=8, hidden_size=512)
-model = baseline_model(grid_size=4, num_actions=8, hidden_size=100)
-# model = load_model()
+# model = baseline_model(grid_size=4, num_actions=8, hidden_size=100)
+model = load_model()
 model.summary()
 
 # necessary evil
@@ -54,9 +53,9 @@ print('started!!!')
 game = CHAIRFED()
 print("game object created")
 
-epoch = 8  # Number of games played in training,
+epoch = 2  # Number of games played in training,
 
-train_mode = 1
+train_mode = 2
 
 if train_mode == 1:
     # Train the model
@@ -65,6 +64,7 @@ if train_mode == 1:
 else:
     # Test the model
     hist = test(game, model, epoch, verbose=1)
+    print("Testing done")
 
 print('finished!!!')
 print(hist)
