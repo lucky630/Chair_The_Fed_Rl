@@ -1,3 +1,5 @@
+##This class used to define reward,over,observe and act functions.
+##
 import numpy as np
 import pytesseract as pt
 from STATE import STATE
@@ -13,6 +15,8 @@ class CHAIRFED(object):
     def __init__(self):
         self.reset()
 
+    ##get the reward as positive if agent able to mantain the unemp rate and
+    ##inflation rate between particular boundaries.
     def _get_reward(self, driver):
         print('\n get reward method\n')
         screen = screen_grab(driver)
@@ -30,6 +34,7 @@ class CHAIRFED(object):
             print('Value Exception in get_reward method: ')
         return ingame_reward
 
+    ##is 16 quarter have finished by the Fed then restart.
     def _is_over(self,driver):
         print('\n is_over method\n')
         is_over=False
@@ -42,6 +47,7 @@ class CHAIRFED(object):
         #is_over = True if action in [0, 1, 2, 3, 4, 5, 6, 7] else False
         return is_over
 
+    ##used to observe the state in which agent  is now.
     def observe(self,driver):
         print('\n observe method\n')
         # get current state s from screen using screen_grab
@@ -54,13 +60,15 @@ class CHAIRFED(object):
             news=' '.join(get_news(screen).split('\n'))
             data=str(fed)+','+str(unemp)+','+str(infl)+','+news
             print(data.encode('utf8'))
-            # process through state_graph to get the state.
-            #state = self.state_graph.get_features_128(news,fed,unemp,infl)
         except ValueError:
             print('Value Exception in observe method: ')
+        # process through state_graph to get the state.
+        #state = self.state_graph.get_features_128(news,fed,unemp,infl)
         state = self.state_graph.get_features_4(news,fed,unemp,infl)
         return state
 
+    ##do the action on environment and then get the game_over status,reward
+    ##which get after doing the action and the next state in the env.
     def act(self, action, driver):
         print('\n act method\n')
         display_action = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
@@ -72,7 +80,7 @@ class CHAIRFED(object):
 
         game_over = self._is_over(driver)
         reward = self._get_reward(driver)
-        ##condition for delay in finish page loading..
+        ##condition for delay in finish page loading bcz of slow internet speed..
         if reward==-10:
             print('game over true bcz of value exception. wait for 5 second:')
             time.sleep(5)

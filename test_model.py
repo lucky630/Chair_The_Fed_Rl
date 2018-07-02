@@ -1,3 +1,4 @@
+##This will used to test the already trained model
 import time
 import numpy as np
 from Game_util_selenium import *
@@ -7,7 +8,6 @@ os.environ["webdriver.chrome.driver"] = chromedriver
 driver = webdriver.Chrome(chromedriver)
 
 def test(game, model, n_games, verbose=1):
-    # Test
     # Reseting the win counter
     win_cnt = 0
     # We want to keep track of the progress of the AI over time, so we save its win count history
@@ -33,7 +33,7 @@ def test(game, model, n_games, verbose=1):
             action = np.argmax(q[0])
             # apply action, get rewards and new state
             input_t, reward, game_over = game.act(action,driver)
-            # If we managed to catch the fruit we add 1 to our win counter
+            # If we managed to get the positive reward we add 1 to our win counter
             if reward == 1:
                 win_cnt += 1
         if verbose > 0:

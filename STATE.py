@@ -1,3 +1,5 @@
+##this class used to define the state in either 4 or 128 features dimension.
+##tfidf and cosine similarity used for giving similar label for similar news.
 import json
 import torch
 import os
@@ -7,8 +9,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 torch.manual_seed(1)
-
-##used to define the state.
 
 class STATE(object):
     
@@ -24,6 +24,8 @@ class STATE(object):
         tor_embed = embeds(look_tor)
         numpy_embed = tor_embed.data.numpy().reshape(-1,125)
         fina_embed = np.append(numpy_embed,[fed,unemp,infla]).reshape(-1,128)
+        ##need to normalize the before input into network
+        ##else it will converge to infinity.
         norm1 = fina_embed / np.linalg.norm(fina_embed)
         print(norm1)
         return norm1
@@ -38,6 +40,7 @@ class STATE(object):
         print("state is: "+str(norm1))
         return norm1
 
+    ##for getting same label for similar sentiment news.
     def tfidf(self,news):
         print('\n tfidf transform method\n')
         vectorizer = CountVectorizer()
@@ -52,7 +55,10 @@ class STATE(object):
         tfidf_test = tfidf_vectorizer.transform(vectorizer.transform(ls))
         k =cosine_similarity(tfidf_test[0], tfidf_matrix_new)
         elmnt = np.amax(k)
-        #elmnt = np.partition(k.flatten(), -2)[-2]
+        #elmnt = np.partition(k.flatten(), -2)[-2]  ##get the second highest array element.
+        ##if cosine similarity between new news and any other saved news is greater
+        ##than 0.5 than label will return from saved dic other wise new label will
+        ##create.
         if(elmnt>0.5):
             print('found similar news')
             itemindex = np.where(k==elmnt)

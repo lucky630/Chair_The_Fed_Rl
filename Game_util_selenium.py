@@ -1,3 +1,5 @@
+##main util class to control the webpage through selenium
+##and getting desired data from the screen using teseract.
 import os
 from PIL import Image
 import pytesseract
@@ -10,7 +12,7 @@ import io
 import numpy as np
 
 """
-os.chdir('C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master')
+os.chdir('C:\\Users\\royal\\Downloads\\Compressed')
 
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
 
@@ -20,6 +22,7 @@ driver = webdriver.Chrome(chromedriver)
 
 """
 
+##used to start the web page and go to game screen.
 def open_page_start(driver):
     #open the chrome browser with site and then maximize the window and click on play now.
     driver.get("https://sffed-education.org/chairthefed/WebGamePlay.html")
@@ -28,6 +31,7 @@ def open_page_start(driver):
     #time.sleep(5)
     #driver.execute_script("window.scrollTo(0, 100)")
 
+##move the application screen to the foreground.
 def get_to_foreground():
     ##get the window to foreground.
     app = application.Application()
@@ -36,6 +40,7 @@ def get_to_foreground():
     app_dialog.Minimize()
     app_dialog.Restore()
 
+##click on go and wait for 8 seconds till the news appeared.
 def click_go(driver):
     driver.find_elements_by_xpath('//*[@id="go_button_anchor"]')[0].click()
     time.sleep(8)
@@ -48,6 +53,8 @@ def click_cut(driver):
     driver.find_elements_by_xpath('//*[@id="decrease_button_anchor"]')[0].click()
     time.sleep(1)
 
+##grab the news,quaters,fed_rates,unemployement and inflation rates
+##from screen and convert to string using tesseract.
 def get_news(screen):
     news = screen[2:100,451:1086]
     i = Image.fromarray(news.astype('uint8'), 'RGB')
@@ -78,6 +85,7 @@ def get_inflate_rate(screen):
     st = pytesseract.image_to_string(i, lang = 'eng')
     return st
 
+##if game on the final screen then start again the env.
 def get_last_msg(driver):
     screen = screen_grab(driver)
     #cv2.imwrite('record\\last'+'.PNG',screen)
@@ -92,6 +100,7 @@ def get_last_msg(driver):
         time.sleep(12)
     return st
 
+##used to set the fed rates according to input action.
 def set_fed_rate(driver,curr,nex):
     mov=0
     if (curr>nex):
@@ -105,6 +114,7 @@ def set_fed_rate(driver,curr,nex):
     ##not for hardcoded action
     click_go(driver)
 
+##record the data for debug purpose.
 def record(i,screen):
     cv2.imwrite('record\\hh'+str(i)+'.PNG',screen)
     news=' '.join(get_news(screen).split('\n'))
@@ -122,6 +132,7 @@ def play_again_win(driver):
 def play_again_loss(driver):
     driver.find_elements_by_xpath('//*[@id="lose_play_now_button_anchor"]')[0].click()
 
+##used to capture the screen and convert into PNG format.
 def screen_grab(driver):
     driver.execute_script("window.scrollTo(0, 100)")
     data = driver.get_screenshot_as_png()
@@ -130,6 +141,7 @@ def screen_grab(driver):
     cv2.imwrite('record\\im_'+str(time.ctime())+'.PNG',screen)
     return screen
 
+##willused to play the game using predefined actions.
 def play(driver):
     time.sleep(18)
     driver.execute_script("window.scrollTo(0, 100)")
