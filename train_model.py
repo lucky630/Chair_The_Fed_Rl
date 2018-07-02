@@ -64,6 +64,7 @@ def train(game, model, epochs, verbose=1):
                 # non random action
                 # q contains the expected rewards for the actions
                 q = model.predict(input_tm1)
+                print('q values=' + str(q[0]))
                 # We pick the action with the highest expected reward
                 action = np.argmax(q[0])
             # apply action, get rewards and new state

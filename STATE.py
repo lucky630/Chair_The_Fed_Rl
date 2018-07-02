@@ -51,7 +51,8 @@ class STATE(object):
         ls.append(news)
         tfidf_test = tfidf_vectorizer.transform(vectorizer.transform(ls))
         k =cosine_similarity(tfidf_test[0], tfidf_matrix_new)
-        elmnt = np.partition(k.flatten(), -2)[-2]
+        elmnt = np.amax(k)
+        #elmnt = np.partition(k.flatten(), -2)[-2]
         if(elmnt>0.5):
             print('found similar news')
             itemindex = np.where(k==elmnt)
