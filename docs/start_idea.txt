@@ -1,5 +1,0 @@
-us dollar currency bank have. simple use case for 1(one) branch how much they should sell,how much should hold,how much should buy or sell to maximize the profit in a quarter from us account holder
-Previous year data for training.
-1. us dollar market data found online.
-2. how much US dollar previously bank have and when they buy and sell
-3. number of us dollar account holder and there withdrawl and deposit info previously.
