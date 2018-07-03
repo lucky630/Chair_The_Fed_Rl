@@ -12,7 +12,6 @@ inflation (2 percent) and unemployment (5 percent) and the information in the he
 The game ends on an announcement screen indicating "Congratulations" if the Chair has kept the economy on track (close to the goals for inflation and unemployment) or "Sorry" if the goals have not been met.
 
 ![alt text](https://github.com/lucky630/Chair_The_Fed_Rl/blob/master/record/both.png)
-
 [Link to Game](https://sffed-education.org/chairthefed/WebGamePlay.html)
 
 # Architecture
