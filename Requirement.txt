@@ -1,0 +1,8 @@
+Pytesseract
+Tensorflow
+Keras
+MatplotLib
+selenium
+PIL
+cv2
+torch
