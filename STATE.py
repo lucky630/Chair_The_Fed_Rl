@@ -13,7 +13,7 @@ torch.manual_seed(1)
 class STATE(object):
     
     ##json file for saving and loading the news and its labels
-    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\DeepGamingAI_FIFARL-master\\record'+'\\'+'new_dic.json'
+    news_dic_loc='C:\\Users\\royal\\Downloads\\Compressed\\record'+'\\'+'new_dic.json'
 
     ##128 dimension features for the state.
     def get_features_128(self,news,fed,unemp,infla):
