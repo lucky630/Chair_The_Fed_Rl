@@ -20,6 +20,10 @@ The game ends on an announcement screen indicating "Congratulations" if the Chai
 
 # Video
 
+<a href="https://youtu.be/vDVLj1d361A" target="_blank"><img src="https://github.com/lucky630/Chair_The_Fed_Rl/blob/master/record/front.png" 
+alt="IMAGE ALT TEXT HERE" width="640" height="380" border="10" /></a>
+
+
 # Setup Requirements
 - Pytesseract
 - Tensorflow
@@ -36,6 +40,6 @@ Run main.py in train or test mode. Toggle the train_mode variable to run in trai
 # To Do list:-
 1. there is too much up and down fed rates are set by the agent have to find a policy which having very low fluctuation.
 2. need to run the model for more number of epochs.
-
+11
 # Contributors
 - [utsav aggarwal](https://github.com/utsav1)
