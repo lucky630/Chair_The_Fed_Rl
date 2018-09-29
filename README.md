@@ -40,6 +40,6 @@ Run main.py in train or test mode. Toggle the train_mode variable to run in trai
 # To Do list:-
 1. there is too much up and down fed rates are set by the agent have to find a policy which having very low fluctuation.
 2. need to run the model for more number of epochs.
-11
+
 # Contributors
 - [utsav aggarwal](https://github.com/utsav1)
