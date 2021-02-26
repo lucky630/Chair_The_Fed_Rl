@@ -41,5 +41,11 @@ Run main.py in train or test mode. Toggle the train_mode variable to run in trai
 1. there is too much up and down fed rates are set by the agent have to find a policy which having very low fluctuation.
 2. need to run the model for more number of epochs.
 
+# Reference:-
+https://github.com/ChintanTrivedi/DeepGamingAI_FIFARL
+
+https://towardsdatascience.com/using-deep-q-learning-in-fifa-18-to-perfect-the-art-of-free-kicks-f2e4e979ee66
+
+
 # Contributors
 - [utsav aggarwal](https://github.com/utsav1)
