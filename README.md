@@ -46,6 +46,3 @@ https://github.com/ChintanTrivedi/DeepGamingAI_FIFARL
 
 https://towardsdatascience.com/using-deep-q-learning-in-fifa-18-to-perfect-the-art-of-free-kicks-f2e4e979ee66
 
-
-# Contributors
-- [utsav aggarwal](https://github.com/utsav1)
